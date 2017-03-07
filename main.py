@@ -173,23 +173,21 @@ class NewPost(BaseHandler):
 
     def post(self):
         if not self.user:
-            self.redirect('/blog')
+            return self.redirect('/blog')
 
         author = self.user.name
         subject = self.request.get('subject')
         content = self.request.get('content')
         user_like = []
 
-        if "submit" in self.request.POST:
-            if subject and content:
-                p = Post(parent = blog_key(), subject = subject, content = content, author = author)
-                p.put()
-                self.redirect('/blog/%s' % str(p.key().id()))
-            else:
-                error = "subject and content, please!"
-                self.render("newpost.html", subject=subject, content=content, error=error)
-        if "cancel" in self.request.POST:
-            self.redirect('/blog')
+        if subject and content:
+            p = Post(parent = blog_key(), subject = subject, content = content, author = author)
+            p.put()
+            self.redirect('/blog/%s' % str(p.key().id()))
+        else:
+            error = "subject and content, please!"
+            self.render("newpost.html", subject=subject, content=content, error=error)
+
 
 class EditPost(BaseHandler):
     def get(self, post_id):
