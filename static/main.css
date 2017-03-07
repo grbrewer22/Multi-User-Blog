@@ -1,0 +1,154 @@
+.app {
+    display: -webkit-flex;
+    display: flex;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.login-area {
+    font-size: 13px;
+    color: gray;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.login-link {
+    color: gray;
+    text-decoration: none;
+}
+
+.login-link:visited {
+    color: gray;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    width: 800px;
+    margin: 0 auto;
+    margin-top: 10px;
+    text-align: center;
+}
+
+#fixed {
+   margin: 0 auto;
+   width: 100%;
+   text-align: left;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.error {
+    color: red;
+}
+
+label {
+    display: block;
+    font-size: 20px;
+}
+
+label + label {
+    margin-top: 20px;
+}
+
+input[type=text] {
+    width: 800px;
+    font-size: 20px;
+    padding: 2px;
+    font-family: monospace;
+}
+
+textarea {
+    width: 800px;
+    height: 400px;
+    font-size: 17px;
+    font-family: monospace;
+}
+
+input[type=submit] {
+    font-size: 16px;
+}
+
+.main-title {
+    display: block;
+    color: #222;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+    text-decoration: none;
+}
+
+.post + .post {
+    margin-top: 15px;
+}
+
+.post-heading {
+    position: relative;
+    border-bottom: 3px solid #555;
+}
+
+.post-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.post-date {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    color: #999;
+
+}
+
+.post-content {
+    margin-top: 5px;
+}
+
+.submit-button {
+    background: #B9DFFF;
+    color: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    box-shadow: 5px 5px 5px #eee;
+}
+
+.submit-button:hover {
+    background: #016ABC;
+    color: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    box-shadow: 5px 5px 5px #eee;
+}
+
+.newPostLink {
+    color: #777;
+}
+
+@media screen and (max-width: 862px) {
+    body {
+        width: 90%;
+    }
+
+    input[type=text] {
+        width: 90%;
+    }
+
+    textarea {
+        width: 90%;
+    }
+}

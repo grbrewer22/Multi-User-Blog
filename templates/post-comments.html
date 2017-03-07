@@ -1,0 +1,19 @@
+{% extends "base2.html" %}
+{% block content %}
+    {{post.render() | safe}}
+    <hr>
+    {% for c in comments %}
+        {{c.render() | safe}}
+        <br>
+        <br>
+    {% endfor %}
+    <hr>
+    <h3>New Comment</h3>
+    <form method="post">
+        <textarea name = "content">{{content}}</textarea>
+        <br>
+        <input type="submit" name="submit" value="Submit">
+    </form>
+        <br>
+        <a href="/blog/{{post.key().id()}}"><button>Cancel</button></a>
+{% endblock %}

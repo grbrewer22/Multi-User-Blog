@@ -1,0 +1,30 @@
+{% extends "base2.html" %}
+
+{% block content %}
+  <div>
+    <div class="comment">
+    <div class="comment-heading">
+        <div class="post-date">
+                {{c.created.strftime("%b %d, %Y")}}
+            </div>
+            <div class="post-by">
+                comment by: {{c.author}}
+            </div>
+            <div>
+                {{c.content}}
+            </div>
+            <div>
+                {{c.last_modified}}
+            </div>
+        </div>
+
+        <div class="comment-content">
+            {{c._render_text | safe}}
+        </div>
+        <div>
+            <a href="/blog/edit-comment/{{c.key().id()}}">Modify</a>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base2.html" %}
+
+{% block content %}
+    {{post.render() | safe}}
+
+    <br>
+    <br>
+
+    <div>
+        <form method="get" action="/blog/editpost/{{post.key().id()}}">
+            <input type="submit" name="modify" value="Modify">
+        </form>
+        <form method="get" action="/blog/commentpost/{{post.key().id()}}">
+            <input type="submit" name="comment" value="Comment">
+        </form>
+    </div>
+
+{% endblock %}
+

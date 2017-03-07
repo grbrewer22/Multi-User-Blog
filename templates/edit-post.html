@@ -1,0 +1,24 @@
+{% extends "base2.html" %}
+
+{% block content %}
+  <h2>edit post</h2>
+
+    <form method="post" id="fixed">
+      <label>
+        <div>subject</div>
+        <input type="text" name="subject" value="{{post.subject}}">
+      </label>
+
+      <label>
+        <div>blog</div>
+        <textarea name="content">{{post.content}}</textarea>
+      </label>
+
+      <div class="error">{{error}}</div>
+
+      <input class="submit-button" type="submit" name="update" value="Update">
+      <input class="delete-button" type="submit" name="delete" value="Delete">
+    </form>
+        <br>
+        <a href="/blog/{{post.key().id()}}"><button>Cancel</button></a>
+{% endblock %}

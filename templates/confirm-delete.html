@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+    {{query.render() | safe}}
+    <hr>
+    <h3>Are you sure you want to delete?</h3>
+    <p>Deleting will permanently remove the post and cannot be undone.</p>
+    <form method="post">
+        <input type="submit" value="Yes" name="delete-post">
+        <input type="submit" value="No" name="cancel-delete">
+    </form>
+{% endblock %}
