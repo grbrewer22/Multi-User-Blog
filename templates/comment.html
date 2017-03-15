@@ -3,7 +3,7 @@
     <div class="comment">
     <div class="comment-heading">
         <div class="post-date">
-                {{c.created.strftime("%b %d, %Y")}}
+                {{c.created.strftime("%B %d, %Y")}}
             </div>
             <div class="post-by">
                 comment by: {{c.author}}
@@ -12,7 +12,7 @@
                 {{c.content}}
             </div>
             <div>
-                {{c.last_modified}}
+                {{c.last_modified.strftime("%B %d, %Y")}}
             </div>
         </div>
 
@@ -20,7 +20,7 @@
             {{c._render_text | safe}}
         </div>
         <div>
-            <a href="/blog/edit-comment/{{c.key().id()}}">Modify</a>
+            <a class="modify-link" href="/blog/editcomment/{{c.key().id()}}"><button>Modify</button></a>
         </div>
     </div>
     </div>

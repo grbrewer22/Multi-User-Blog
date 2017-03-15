@@ -1,7 +1,8 @@
 <div class="post">
     <div class="post-heading">
         <div class="post-title">
-            <a class="title-link" href="/blog/{{p.key().id()}}">{{p.subject}}</a>
+            <a class="title-link"
+               href="/blog/{{p.key().id()}}">{{p.subject}}</a>
         </div>
 
         <div class="post-date">
@@ -23,7 +24,12 @@
 
     <div>
         <form method="post" action="/blog/{{p.key().id()}}/like">
-            <input type="submit" name="like-button" value="Like" id="{{p.key().id()}}">
+            <input
+            type="submit"
+            name="like-button"
+            value="Like"
+            id="{{p.key().id()}}">
         </form>
-</div>
+    </div>
+
 </div>

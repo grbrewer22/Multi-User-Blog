@@ -11,6 +11,8 @@
 }
 
 .login-area {
+    background-color: lightgray;
+    padding: 4px;
     font-size: 13px;
     color: gray;
     position: absolute;
@@ -40,12 +42,6 @@ body {
     text-align: center;
 }
 
-#fixed {
-   margin: 0 auto;
-   width: 100%;
-   text-align: left;
-}
-
 h2 {
     font-size: 24px;
     font-weight: bold;
@@ -72,15 +68,23 @@ input[type=text] {
     font-family: monospace;
 }
 
+input[type=password] {
+    width: 800px;
+    font-size: 20px;
+    padding: 2px;
+    font-family: monospace;
+}
+
 textarea {
     width: 800px;
-    height: 400px;
+    height: 300px;
     font-size: 17px;
     font-family: monospace;
 }
 
 input[type=submit] {
     font-size: 16px;
+
 }
 
 .main-title {
@@ -100,11 +104,22 @@ input[type=submit] {
 .post-heading {
     position: relative;
     border-bottom: 3px solid #555;
+    color: black;
+    text-decoration: none;
 }
 
 .post-title {
     font-size: 24px;
     font-weight: bold;
+    color: black;
+    text-decoration: none;
+}
+
+.title-link {
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
 }
 
 .post-date {
@@ -139,12 +154,22 @@ input[type=submit] {
     color: #777;
 }
 
+#fixed {
+   margin: 0 auto;
+   width: 100%;
+   text-align: left;
+}
+
 @media screen and (max-width: 862px) {
     body {
         width: 90%;
     }
 
     input[type=text] {
+        width: 90%;
+    }
+
+    input[type=password] {
         width: 90%;
     }
 

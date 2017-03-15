@@ -8,6 +8,7 @@ from string import letters
 import jinja2
 import webapp2
 import time
+import datetime
 
 from google.appengine.ext import db
 
@@ -181,12 +182,18 @@ class NewPost(BaseHandler):
         user_like = []
 
         if subject and content:
-            p = Post(parent = blog_key(), subject = subject, content = content, author = author)
+            p = Post(parent = blog_key(),
+                     subject = subject,
+                     content = content,
+                     author = author)
             p.put()
             self.redirect('/blog/%s' % str(p.key().id()))
         else:
             error = "subject and content, please!"
-            self.render("newpost.html", subject=subject, content=content, error=error)
+            self.render("newpost.html",
+                     subject=subject,
+                     content=content,
+                     error=error)
 
 
 class EditPost(BaseHandler):
@@ -224,7 +231,10 @@ class EditPost(BaseHandler):
 
         else:
                 error = "subject and content, please!"
-                self.render("edit-post.html", subject=subject, content=content, error=error)
+                self.render("edit-post.html",
+                    subject=subject,
+                    content=content,
+                    error=error)
 
         if "delete" in self.request.POST:
             if not self.user:

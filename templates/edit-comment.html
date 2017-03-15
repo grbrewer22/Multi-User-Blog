@@ -1,18 +1,18 @@
 {% extends "base2.html" %}
 {% block content %}
 
-<h2>Edit Comment</h2>
-<form method="post">
-    <label>
-        <div>Content</div>
-        <textarea name="content">{{comment.content}}</textarea>
-    </label>
+    <h2>Edit Comment</h2>
+    <form method="post">
+        <label>
+            <div>Content</div>
+            <textarea name="content">{{comment.content}}</textarea>
+        </label>
 
-    <div class="error">{{error}}</div>
+        <div class="error">{{error}}</div>
 
-    <input type="submit" name="update" value="Update">
-    <input type="submit" name="delete" value="Delete">
-</form>
-    <br>
-    <a href="/blog/{{comment.postid}}"><button>Cancel</button></a>
+        <input type="submit" name="update" value="Update">
+        <input type="submit" name="delete" value="Delete">
+    </form>
+        <br>
+        <a href="/blog/{{comment.postid}}"><button>Cancel</button></a>
 {% endblock %}
