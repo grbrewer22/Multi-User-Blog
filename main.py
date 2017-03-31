@@ -125,7 +125,7 @@ def blog_key(name = 'default'):
     return db.Key.from_path('blogs', name)
 
 class Post(db.Model):
-    author = db.StringProperty(required=True)
+    author = db.StringProperty(required=True) # author = db.ReferenceProperty(User) => post.author
     subject = db.StringProperty(required = True)
     content = db.TextProperty(required = True)
     created = db.DateTimeProperty(auto_now_add = True)
@@ -138,7 +138,7 @@ class Post(db.Model):
         return render_str("post.html", p=self)
 
 class Comment(db.Model):
-    author = db.StringProperty(required=True)
+    author = db.StringProperty(required=True) # author = db.ReferenceProperty(User) =>
     content = db.TextProperty(required=True)
     postid = db.StringProperty(required=True)
     created = db.DateTimeProperty(auto_now_add=True)
@@ -185,7 +185,7 @@ class NewPost(BaseHandler):
             p = Post(parent = blog_key(),
                      subject = subject,
                      content = content,
-                     author = author)
+                     author = author) # author = self.user.key()
             p.put()
             self.redirect('/blog/%s' % str(p.key().id()))
         else:
@@ -489,7 +489,7 @@ class Welcome(BaseHandler):
         else:
             self.redirect('/unit2/signup')
 
-app = webapp2.WSGIApplication([('/', MainPage),
+app = webapp2.WSGIApplication([('/', BlogFront),
                                ('/unit2/rot13', Rot13),
                                ('/unit2/signup', Unit2Signup),
                                ('/unit2/welcome', Welcome),
