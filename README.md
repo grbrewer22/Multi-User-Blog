@@ -1,6 +1,8 @@
 # Multi-User-Blog
 A Multi-User blog featuring post editing and commenting
 
+The web app can be found here: https://registration-159603.appspot.com/
+
 To run the application locally:
 1. Clone the repository from [Github](https://github.com)
 2. Install Google App Engine for Python by following instructions found [here](https://cloud.google.com/appengine/docs/python/how-to)
