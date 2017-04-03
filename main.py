@@ -33,6 +33,7 @@ def check_secure_val(secure_val):
         return val
 
 class BaseHandler(webapp2.RequestHandler):
+    """Sets the parent handler for rendering pages and cookies."""
     def write(self, *a, **kw):
         self.response.out.write(*a, **kw)
 
@@ -41,25 +42,31 @@ class BaseHandler(webapp2.RequestHandler):
         return render_str(template, **params)
 
     def render(self, template, **kw):
+        """Renders template."""
         self.write(self.render_str(template, **kw))
 
     def set_secure_cookie(self, name, val):
+        """Sets a cookie."""
         cookie_val = make_secure_val(val)
         self.response.headers.add_header(
             'Set-Cookie',
             '%s=%s; Path=/' % (name, cookie_val))
 
     def read_secure_cookie(self, name):
+        """Reads a cookie and returns it's value."""
         cookie_val = self.request.cookies.get(name)
         return cookie_val and check_secure_val(cookie_val)
 
     def login(self, user):
+        """Sets a cookie for login."""
         self.set_secure_cookie('user_id', str(user.key().id()))
 
     def logout(self):
+        """Overwrites the cookie with none to stop the user session."""
         self.response.headers.add_header('Set-Cookie', 'user_id=; Path=/')
 
     def initialize(self, *a, **kw):
+        """Initializes pages with user signed in."""
         webapp2.RequestHandler.initialize(self, *a, **kw)
         uid = self.read_secure_cookie('user_id')
         self.user = uid and User.by_id(int(uid))
@@ -69,6 +76,7 @@ def render_post(response, post):
     response.out.write(post.content)
 
 class MainPage(BaseHandler):
+  """The main page handler."""
   def get(self):
       self.write('Hello, Udacity!')
 
@@ -155,6 +163,7 @@ class BlogFront(BaseHandler):
         self.render('front.html', posts=posts)
 
 class PostPage(BaseHandler):
+    """The single post page handler"""
     def get(self, post_id):
         key = db.Key.from_path('Post', int(post_id), parent=blog_key())
         post = db.get(key)
@@ -166,6 +175,7 @@ class PostPage(BaseHandler):
         self.render("permalink.html", post=post)
 
 class NewPost(BaseHandler):
+    """The handler for creating new posts."""
     def get(self):
         if self.user:
             self.render("newpost.html")
@@ -197,6 +207,7 @@ class NewPost(BaseHandler):
 
 
 class EditPost(BaseHandler):
+    """The handler for editing posts."""
     def get(self, post_id):
         if self.user:
             key = db.Key.from_path('Post', int(post_id), parent=blog_key())
@@ -248,7 +259,7 @@ class EditPost(BaseHandler):
             )
 
 class ConfirmDelete(BaseHandler):
-
+    """The handler that confirms deletion of a post"""
     def get(self, post_id):
         if self.user:
             key = db.Key.from_path('Post', int(post_id), parent=blog_key())
@@ -275,6 +286,7 @@ class ConfirmDelete(BaseHandler):
             return self.redirect("/blog")
 
 class LikePost(BaseHandler):
+    """The handler for liking a post"""
     def post(self, post_id):
         if self.user:
             key = db.Key.from_path('Post', int(post_id), parent=blog_key())
@@ -301,6 +313,7 @@ class LikePost(BaseHandler):
 
 
 class CommentPostPage(BaseHandler):
+    """The handler for posting comments on a post."""
     def get(self, post_id):
         if self.user:
             key = db.Key.from_path('Post', int(post_id), parent=blog_key())
@@ -342,6 +355,7 @@ class CommentPostPage(BaseHandler):
 
 
 class EditComment(BaseHandler):
+    """The handler for editing comments on posts."""
     def get(self, comment_id):
         if self.user:
             key = db.Key.from_path('Comment', int(comment_id))
@@ -399,10 +413,13 @@ def valid_email(email):
     return not email or EMAIL_RE.match(email)
 
 class Signup(BaseHandler):
+    """The signup page handler."""
     def get(self):
+        """Renders the page."""
         self.render("signup-form.html")
 
     def post(self):
+        """Validates the user inputs + error messages."""
         have_error = False
         self.username = self.request.get('username')
         self.password = self.request.get('password')
@@ -433,6 +450,7 @@ class Signup(BaseHandler):
             self.done()
 
     def done(self, *a, **kw):
+        """Raises not implemented error."""
         raise NotImplementedError
 
 class Unit2Signup(Signup):
@@ -440,24 +458,27 @@ class Unit2Signup(Signup):
         self.redirect('/unit2/welcome?username=' + self.username)
 
 class Register(Signup):
+    """The user registration handler for signup page."""
     def done(self):
-        #make sure the user doesn't already exist
+        """make sure the user doesn't already exist"""
         u = User.by_name(self.username)
         if u:
             msg = 'That user already exists.'
             self.render('signup-form.html', error_username = msg)
         else:
             u = User.register(self.username, self.password, self.email)
-            u.put()
+            u.put()  #saves user data to db
 
             self.login(u)
             self.redirect('/blog')
 
 class Login(BaseHandler):
+    """The login page handler."""
     def get(self):
         self.render('login-form.html')
 
     def post(self):
+        """Validates the user login."""
         username = self.request.get('username')
         password = self.request.get('password')
 
@@ -470,6 +491,7 @@ class Login(BaseHandler):
             self.render('login-form.html', error = msg)
 
 class Logout(BaseHandler):
+    """The logout handler."""
     def get(self):
         self.logout()
         self.redirect('/signup')
