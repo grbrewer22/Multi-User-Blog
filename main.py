@@ -231,7 +231,7 @@ class EditPost(BaseHandler):
         subject = self.request.get('subject')
         content = self.request.get('content')
 
-        if subject and content:
+        if subject and content and self.user.name == post.author:
             upVal = Post.get_by_id(int(post_id), parent=blog_key())
             if not upVal:
                 return self.error(404)
@@ -274,7 +274,7 @@ class ConfirmDelete(BaseHandler):
         if not self.user:
             return self.redirect('/blog')
 
-        if "delete-post" in self.request.POST:
+        if "delete-post" in self.request.POST and self.user.name == post.author:
             delVal = Post.get_by_id(int(post_id), parent=blog_key())
             if not delVal:
                 return self.error(404)
@@ -377,7 +377,7 @@ class EditComment(BaseHandler):
         content = self.request.get('content')
         commentVal = Comment.get_by_id(int(comment_id))
 
-        if "update" in self.request.POST:
+        if "update" in self.request.POST and self.user.name == post.author:
             if content:
                 commentVal.content = content
                 commentVal.put()
