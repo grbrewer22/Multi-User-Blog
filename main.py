@@ -377,7 +377,7 @@ class EditComment(BaseHandler):
         content = self.request.get('content')
         commentVal = Comment.get_by_id(int(comment_id))
 
-        if "update" in self.request.POST and self.user.name == post.author:
+        if "update" in self.request.POST and self.user.name == comment.author:
             if content:
                 commentVal.content = content
                 commentVal.put()
